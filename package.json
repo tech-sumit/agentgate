@@ -1,0 +1,78 @@
+{
+  "name": "agentgate",
+  "version": "1.0.0",
+  "description": "Content-Signal headers and markdown content negotiation for AI agents. Like helmet for agent-readiness.",
+  "author": "Sumit Agrawal <mr.sumitagrawal.17@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/sumitagrawal/agentgate#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumitagrawal/agentgate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sumitagrawal/agentgate/issues"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "content-signals",
+    "ai-agent",
+    "llm",
+    "markdown",
+    "middleware",
+    "express",
+    "content-negotiation",
+    "robots-txt",
+    "ai-train",
+    "ai-input",
+    "cloudflare",
+    "agentgate"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "picomatch": "^4.0.2"
+  },
+  "optionalDependencies": {
+    "turndown": "^7.2.0",
+    "turndown-plugin-gfm": "^1.0.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^22.0.0",
+    "@types/picomatch": "^3.0.0",
+    "@types/turndown": "^5.0.5",
+    "express": "^5.2.1",
+    "tsup": "^8.0.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

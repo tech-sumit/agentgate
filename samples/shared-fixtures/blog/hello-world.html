@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><title>Hello World — Blog — AgentGate Demo</title></head>
+<body>
+  <nav><a href="/">Home</a> | <a href="/about">About</a> | <a href="/blog/hello-world">Blog</a></nav>
+  <article>
+    <h1>Hello World</h1>
+    <p>This is a sample blog post to demonstrate per-path Content-Signal overrides.</p>
+    <p>Blog posts might allow AI input (RAG/grounding) but disallow AI training:</p>
+    <pre><code>Content-Signal: search=yes, ai-input=yes, ai-train=no</code></pre>
+    <p>Meanwhile, the <code>/api</code> routes block all AI access entirely.</p>
+  </article>
+  <footer><p>&copy; 2026 AgentGate Demo</p></footer>
+</body>
+</html>
