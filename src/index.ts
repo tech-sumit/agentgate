@@ -3,10 +3,10 @@ import { buildSignal } from './signals.js';
 import { wantsMarkdown } from './negotiate.js';
 import { resolveCompanion, serveMd } from './serve-md.js';
 import { convertAndServe } from './convert.js';
-import type { AgentGateOptions, Middleware } from './types.js';
+import type { AgentSignalOptions, Middleware } from './types.js';
 
 export type {
-  AgentGateOptions,
+  AgentSignalOptions,
   SignalConfig,
   ConvertOptions,
   Middleware,
@@ -16,23 +16,23 @@ export { wantsMarkdown } from './negotiate.js';
 export { resolveCompanion, extractTokenCount, estimateTokens } from './serve-md.js';
 
 /**
- * Create an agentgate middleware that adds Content-Signal headers
+ * Create an agentsignal middleware that adds Content-Signal headers
  * and handles Accept: text/markdown content negotiation.
  *
  * @example
  * ```typescript
  * import express from 'express';
- * import { agentgate } from 'agentgate';
+ * import { agentsignal } from 'agentsignal';
  *
  * const app = express();
- * app.use(agentgate({
+ * app.use(agentsignal({
  *   signals: { search: true, aiInput: true, aiTrain: false },
  *   staticDir: './dist',
  * }));
  * app.use(express.static('./dist'));
  * ```
  */
-export function agentgate(options: AgentGateOptions): Middleware {
+export function agentsignal(options: AgentSignalOptions): Middleware {
   const { signals, overrides, staticDir, convert, convertOptions } = options;
 
   return (

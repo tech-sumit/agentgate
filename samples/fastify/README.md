@@ -1,6 +1,6 @@
 # Fastify Sample
 
-Demonstrates agentgate with [Fastify](https://fastify.dev) via `@fastify/middie`.
+Demonstrates agentsignal with [Fastify](https://fastify.dev) via `@fastify/middie`.
 
 ## Install Extra Dependencies
 
@@ -29,7 +29,7 @@ Fastify supports Express-style middleware through `@fastify/middie`. Two lines:
 
 ```typescript
 await app.register(middie);
-app.use(agentgate({ signals: { ... }, staticDir: './public' }));
+app.use(agentsignal({ signals: { ... }, staticDir: './public' }));
 ```
 
 That's it. Every Fastify response now includes Content-Signal headers, and markdown content negotiation works automatically.

@@ -1,6 +1,6 @@
 # Hono Sample
 
-Demonstrates agentgate with the [Hono](https://hono.dev) framework using `@hono/node-server`.
+Demonstrates agentsignal with the [Hono](https://hono.dev) framework using `@hono/node-server`.
 
 ## Install Extra Dependencies
 
@@ -25,12 +25,12 @@ curl -i http://localhost:3002/api/v1/status
 
 ## Integration Pattern
 
-Hono uses Web Standard Request/Response, not Node.js `IncomingMessage`/`ServerResponse`. The sample wraps agentgate in a Hono middleware that creates a shim between the two models.
+Hono uses Web Standard Request/Response, not Node.js `IncomingMessage`/`ServerResponse`. The sample wraps agentsignal in a Hono middleware that creates a shim between the two models.
 
 For simpler setups, you can also use `buildSignal()` directly:
 
 ```typescript
-import { buildSignal, wantsMarkdown } from 'agentgate';
+import { buildSignal, wantsMarkdown } from 'agentsignal';
 
 app.use('*', async (c, next) => {
   c.header('Content-Signal', buildSignal(

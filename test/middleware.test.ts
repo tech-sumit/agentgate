@@ -2,7 +2,7 @@ import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import http from 'node:http';
 import { join } from 'node:path';
 import { mkdirSync, writeFileSync, rmSync } from 'node:fs';
-import { agentgate } from '../src/index.js';
+import { agentsignal } from '../src/index.js';
 
 const FIXTURES = join(import.meta.dirname, '__fixtures_mw__');
 let server: http.Server;
@@ -43,7 +43,7 @@ beforeAll(async () => {
     '# Home\n\nWelcome.\n',
   );
 
-  const middleware = agentgate({
+  const middleware = agentsignal({
     signals: { search: true, aiInput: true, aiTrain: false },
     overrides: {
       '/api/**': { search: false, aiInput: false, aiTrain: false },
@@ -58,7 +58,7 @@ beforeAll(async () => {
     });
   });
 
-  const convertMiddleware = agentgate({
+  const convertMiddleware = agentsignal({
     signals: { search: true, aiInput: true, aiTrain: false },
     convert: true,
     convertOptions: { strip: ['nav', 'footer'], prefer: ['main'] },
@@ -101,7 +101,7 @@ afterAll(async () => {
   rmSync(FIXTURES, { recursive: true, force: true });
 });
 
-describe('agentgate middleware', () => {
+describe('agentsignal middleware', () => {
   it('adds Content-Signal header to every response', async () => {
     const res = await fetch('/');
     expect(res.headers['content-signal']).toBe(
@@ -165,7 +165,7 @@ describe('agentgate middleware', () => {
   });
 });
 
-describe('agentgate on-the-fly conversion', () => {
+describe('agentsignal on-the-fly conversion', () => {
   it('converts HTML to markdown when Accept: text/markdown', async () => {
     const res = await fetchFrom(convertBaseUrl, '/', {
       Accept: 'text/markdown',
@@ -219,12 +219,12 @@ describe('agentgate on-the-fly conversion', () => {
   });
 });
 
-describe('agentgate status code preservation', () => {
+describe('agentsignal status code preservation', () => {
   let statusServer: http.Server;
   let statusBaseUrl: string;
 
   beforeAll(async () => {
-    const mw = agentgate({
+    const mw = agentsignal({
       signals: { search: true, aiInput: true, aiTrain: false },
       convert: true,
     });

@@ -21,8 +21,8 @@ export interface ConvertOptions {
   prefer?: string[];
 }
 
-/** Configuration for the agentgate middleware. */
-export interface AgentGateOptions {
+/** Configuration for the agentsignal middleware. */
+export interface AgentSignalOptions {
   /** Default Content-Signal values applied to every response. */
   signals: SignalConfig;
   /** Per-path glob overrides for Content-Signal values. Keys are glob patterns. */

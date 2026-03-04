@@ -1,7 +1,7 @@
 /**
- * AgentGate + plain Node.js http sample
+ * AgentSignal + plain Node.js http sample
  *
- * Zero dependencies beyond agentgate itself. Shows that the middleware
+ * Zero dependencies beyond agentsignal itself. Shows that the middleware
  * works with any (req, res, next) consumer — no Express required.
  *
  * Run:
@@ -15,12 +15,12 @@ import http from 'node:http';
 import { readFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { agentgate } from '../../src/index.js';
+import { agentsignal } from '../../src/index.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const fixtures = join(__dirname, '..', 'shared-fixtures');
 
-const middleware = agentgate({
+const middleware = agentsignal({
   signals: { search: true, aiInput: true, aiTrain: false },
   staticDir: fixtures,
 });

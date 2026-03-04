@@ -139,7 +139,7 @@ function htmlToMarkdown(html: string, options?: ConvertOptions): string {
     gfm = _require('turndown-plugin-gfm') as typeof gfm;
   } catch {
     throw new Error(
-      'agentgate: on-the-fly conversion requires "turndown" and "turndown-plugin-gfm". ' +
+      'agentsignal: on-the-fly conversion requires "turndown" and "turndown-plugin-gfm". ' +
         'Install them: npm install turndown turndown-plugin-gfm',
     );
   }

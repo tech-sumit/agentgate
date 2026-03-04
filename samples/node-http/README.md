@@ -1,6 +1,6 @@
 # Plain Node.js HTTP Sample
 
-Demonstrates agentgate with Node.js `http.createServer` — no framework required.
+Demonstrates agentsignal with Node.js `http.createServer` — no framework required.
 
 ## Run
 
@@ -21,10 +21,10 @@ curl -i -H "Accept: text/markdown" http://localhost:3001/about
 
 ## Key Takeaway
 
-The middleware uses the standard `(req, res, next)` signature. Wrap your handler as the `next()` callback and agentgate handles the rest.
+The middleware uses the standard `(req, res, next)` signature. Wrap your handler as the `next()` callback and agentsignal handles the rest.
 
 ```typescript
-const middleware = agentgate({ signals: { ... }, staticDir: './public' });
+const middleware = agentsignal({ signals: { ... }, staticDir: './public' });
 
 http.createServer((req, res) => {
   middleware(req, res, () => {

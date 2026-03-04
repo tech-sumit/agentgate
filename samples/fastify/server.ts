@@ -1,8 +1,8 @@
 /**
- * AgentGate + Fastify sample
+ * AgentSignal + Fastify sample
  *
  * Fastify supports Express-style middleware via @fastify/middie.
- * This is the simplest integration — register middie, then app.use(agentgate()).
+ * This is the simplest integration — register middie, then app.use(agentsignal()).
  *
  * Run:
  *   npx tsx samples/fastify/server.ts
@@ -17,7 +17,7 @@ import middie from '@fastify/middie';
 import fastifyStatic from '@fastify/static';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { agentgate } from '../../src/index.js';
+import { agentsignal } from '../../src/index.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const fixtures = join(__dirname, '..', 'shared-fixtures');
@@ -27,7 +27,7 @@ const app = Fastify({ logger: false });
 async function start() {
   await app.register(middie);
 
-  app.use(agentgate({
+  app.use(agentsignal({
     signals: { search: true, aiInput: true, aiTrain: false },
     overrides: {
       '/api/**': { search: false, aiInput: false, aiTrain: false },

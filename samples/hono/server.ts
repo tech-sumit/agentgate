@@ -1,7 +1,7 @@
 /**
- * AgentGate + Hono sample
+ * AgentSignal + Hono sample
  *
- * Hono uses its own request/response model, so we wrap agentgate
+ * Hono uses its own request/response model, so we wrap agentsignal
  * in a Hono-compatible middleware adapter.
  *
  * Run:
@@ -15,12 +15,12 @@ import { Hono } from 'hono';
 import { serve } from '@hono/node-server';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { agentgate } from '../../src/index.js';
+import { agentsignal } from '../../src/index.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const fixtures = join(__dirname, '..', 'shared-fixtures');
 
-const middleware = agentgate({
+const middleware = agentsignal({
   signals: { search: true, aiInput: true, aiTrain: false },
   overrides: {
     '/api/**': { search: false, aiInput: false, aiTrain: false },
@@ -87,8 +87,8 @@ app.use('*', async (c, next) => {
   await next();
 });
 
-app.get('/', (c) => c.html('<h1>Home</h1><p>Hono + AgentGate</p>'));
-app.get('/about', (c) => c.html('<h1>About</h1><p>AgentGate middleware demo with Hono.</p>'));
+app.get('/', (c) => c.html('<h1>Home</h1><p>Hono + AgentSignal</p>'));
+app.get('/about', (c) => c.html('<h1>About</h1><p>AgentSignal middleware demo with Hono.</p>'));
 app.get('/api/v1/status', (c) => c.json({ status: 'ok' }));
 
 const port = Number(process.env.PORT) || 3002;

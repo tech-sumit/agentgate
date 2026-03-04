@@ -1,21 +1,21 @@
-# agentgate
+# agentsignal
 
 Content-Signal headers and markdown content negotiation for AI agents.
 Like [helmet](https://helmetjs.github.io/) for security headers, but for AI agent compatibility.
 
 ```
-npm install agentgate
+npm install agentsignal
 ```
 
 ## Quick Start
 
 ```typescript
 import express from 'express';
-import { agentgate } from 'agentgate';
+import { agentsignal } from 'agentsignal';
 
 const app = express();
 
-app.use(agentgate({
+app.use(agentsignal({
   signals: { search: true, aiInput: true, aiTrain: false },
   staticDir: './public',
 }));
@@ -61,9 +61,9 @@ When serving markdown, adds `x-markdown-tokens: <count>` — read from YAML fron
 ## API
 
 ```typescript
-import { agentgate } from 'agentgate';
+import { agentsignal } from 'agentsignal';
 
-app.use(agentgate({
+app.use(agentsignal({
   // Content-Signal header values (required)
   signals: {
     search: true,       // allow search indexing
@@ -131,7 +131,7 @@ app.use(agentgate({
 
 ## Companion Files
 
-Place `.html.md` files alongside your HTML pages. Agentgate resolves them by convention:
+Place `.html.md` files alongside your HTML pages. AgentSignal resolves them by convention:
 
 | Request Path | Companion Lookup Order |
 |---|---|
@@ -151,7 +151,7 @@ tokens: 312
 We build things.
 ```
 
-If `tokens` is missing, agentgate estimates it (~4 characters per token).
+If `tokens` is missing, agentsignal estimates it (~4 characters per token).
 
 ---
 
@@ -161,10 +161,10 @@ If `tokens` is missing, agentgate estimates it (~4 characters per token).
 
 ```typescript
 import express from 'express';
-import { agentgate } from 'agentgate';
+import { agentsignal } from 'agentsignal';
 
 const app = express();
-app.use(agentgate({ signals: { search: true, aiInput: true, aiTrain: false } }));
+app.use(agentsignal({ signals: { search: true, aiInput: true, aiTrain: false } }));
 ```
 
 ### Fastify (via @fastify/middie)
@@ -172,18 +172,18 @@ app.use(agentgate({ signals: { search: true, aiInput: true, aiTrain: false } }))
 ```typescript
 import Fastify from 'fastify';
 import middie from '@fastify/middie';
-import { agentgate } from 'agentgate';
+import { agentsignal } from 'agentsignal';
 
 const app = Fastify();
 await app.register(middie);
-app.use(agentgate({ signals: { search: true, aiInput: true, aiTrain: false } }));
+app.use(agentsignal({ signals: { search: true, aiInput: true, aiTrain: false } }));
 ```
 
 ### Hono (using buildSignal directly)
 
 ```typescript
 import { Hono } from 'hono';
-import { buildSignal } from 'agentgate';
+import { buildSignal } from 'agentsignal';
 
 const app = new Hono();
 app.use('*', async (c, next) => {
@@ -201,9 +201,9 @@ app.use('*', async (c, next) => {
 
 ```typescript
 import http from 'node:http';
-import { agentgate } from 'agentgate';
+import { agentsignal } from 'agentsignal';
 
-const middleware = agentgate({
+const middleware = agentsignal({
   signals: { search: true, aiInput: true, aiTrain: false },
   staticDir: './public',
 });
@@ -242,13 +242,13 @@ curl -i -H "Accept: text/markdown" http://localhost:3000/about
 
 ## On-the-fly Conversion
 
-When `convert: true` and no `.html.md` companion exists, agentgate converts the HTML response to markdown using [Turndown](https://github.com/mixmark-io/turndown). Install the optional dependencies:
+When `convert: true` and no `.html.md` companion exists, agentsignal converts the HTML response to markdown using [Turndown](https://github.com/mixmark-io/turndown). Install the optional dependencies:
 
 ```bash
 npm install turndown turndown-plugin-gfm
 ```
 
-These are listed as `optionalDependencies` — agentgate works without them if you only use companion files.
+These are listed as `optionalDependencies` — agentsignal works without them if you only use companion files.
 
 ---
 
@@ -258,9 +258,9 @@ These are listed as `optionalDependencies` — agentgate works without them if y
 
 A: Content-Signal is an HTTP response header defined by the [Content Signals](https://contentsignals.org/) specification. It tells AI agents and crawlers what they may do with your content — whether they can use it for search indexing (`search`), real-time AI retrieval like RAG (`ai-input`), or model training (`ai-train`). Think of it as `robots.txt` but per-response and more granular.
 
-### Q: What problem does agentgate solve?
+### Q: What problem does agentsignal solve?
 
-A: AI agents are crawling the web, but there's no standard way to tell them "you can use this page for search answers but not for training your model." Content-Signal headers fill that gap. Agentgate makes it trivial to add these headers to any Node.js server with one `app.use()` call.
+A: AI agents are crawling the web, but there's no standard way to tell them "you can use this page for search answers but not for training your model." Content-Signal headers fill that gap. AgentSignal makes it trivial to add these headers to any Node.js server with one `app.use()` call.
 
 ### Q: How is this different from robots.txt?
 
@@ -268,18 +268,18 @@ A: `robots.txt` controls whether a crawler can access a URL at all. Content-Sign
 
 ### Q: What is content negotiation and why does it matter for AI agents?
 
-A: Content negotiation is an HTTP mechanism where the client says what format it prefers (via the `Accept` header) and the server responds accordingly. AI agents prefer markdown over HTML because it's cleaner, smaller, and doesn't contain layout noise. When an agent sends `Accept: text/markdown`, agentgate serves the markdown version instead of HTML.
+A: Content negotiation is an HTTP mechanism where the client says what format it prefers (via the `Accept` header) and the server responds accordingly. AI agents prefer markdown over HTML because it's cleaner, smaller, and doesn't contain layout noise. When an agent sends `Accept: text/markdown`, agentsignal serves the markdown version instead of HTML.
 
 ### Q: What is a .html.md companion file?
 
-A: It's a markdown version of an HTML page, placed alongside the original. For `about.html`, the companion is `about.html.md`. You write it once (or generate it at build time), and agentgate serves it to agents that request markdown. The companion can include YAML frontmatter with a `tokens` field for accurate token counting.
+A: It's a markdown version of an HTML page, placed alongside the original. For `about.html`, the companion is `about.html.md`. You write it once (or generate it at build time), and agentsignal serves it to agents that request markdown. The companion can include YAML frontmatter with a `tokens` field for accurate token counting.
 
 ### Q: Do I need to create .html.md files for every page?
 
 A: No. You have three options:
 1. **Companion files only** — create `.html.md` files for important pages (set `staticDir`)
-2. **On-the-fly conversion** — set `convert: true` and agentgate converts HTML to markdown automatically using Turndown
-3. **Headers only** — skip `staticDir` and `convert`, and agentgate only adds Content-Signal headers (no markdown serving)
+2. **On-the-fly conversion** — set `convert: true` and agentsignal converts HTML to markdown automatically using Turndown
+3. **Headers only** — skip `staticDir` and `convert`, and agentsignal only adds Content-Signal headers (no markdown serving)
 
 ### Q: What is the x-markdown-tokens header?
 
@@ -298,17 +298,17 @@ overrides: {
 
 If no pattern matches, the default `signals` config applies.
 
-### Q: Does agentgate work with Next.js, Nuxt, or other meta-frameworks?
+### Q: Does agentsignal work with Next.js, Nuxt, or other meta-frameworks?
 
-A: Agentgate is framework-agnostic — it uses the standard Node.js `(req, res, next)` signature. For Next.js, use it in a custom server or API route middleware. For Nuxt, use it as server middleware. For any framework that supports Express-style middleware, it's a single `app.use()` call.
+A: AgentSignal is framework-agnostic — it uses the standard Node.js `(req, res, next)` signature. For Next.js, use it in a custom server or API route middleware. For Nuxt, use it as server middleware. For any framework that supports Express-style middleware, it's a single `app.use()` call.
 
 ### Q: What happens if turndown is not installed and convert is true?
 
-A: Agentgate throws a clear error: `"agentgate: on-the-fly conversion requires turndown and turndown-plugin-gfm."` Install them with `npm install turndown turndown-plugin-gfm`. If you only use companion files, these packages are not needed.
+A: AgentSignal throws a clear error: `"agentsignal: on-the-fly conversion requires turndown and turndown-plugin-gfm."` Install them with `npm install turndown turndown-plugin-gfm`. If you only use companion files, these packages are not needed.
 
 ### Q: How does on-the-fly conversion work internally?
 
-A: Agentgate intercepts the response by monkey-patching `res.write()` and `res.end()`. It buffers the HTML output, checks that the response is `text/html`, then converts it to markdown via Turndown. The `strip` option removes unwanted elements (nav, footer, ads) and `prefer` extracts content from specific containers (article, main) before conversion.
+A: AgentSignal intercepts the response by monkey-patching `res.write()` and `res.end()`. It buffers the HTML output, checks that the response is `text/html`, then converts it to markdown via Turndown. The `strip` option removes unwanted elements (nav, footer, ads) and `prefer` extracts content from specific containers (article, main) before conversion.
 
 ### Q: What is the performance impact?
 
@@ -316,7 +316,7 @@ A: **For companion files**: near-zero overhead — a synchronous file existence 
 
 ### Q: How do I generate .html.md companion files at build time?
 
-A: Agentgate is a runtime middleware, not a build tool. For generating companion files, use [llmoptimizer](https://www.npmjs.com/package/llmoptimizer) or write a simple script:
+A: AgentSignal is a runtime middleware, not a build tool. For generating companion files, use [llmoptimizer](https://www.npmjs.com/package/llmoptimizer) or write a simple script:
 
 ```bash
 for f in dist/*.html; do
@@ -326,15 +326,15 @@ done
 
 ### Q: Is this related to Cloudflare's "Markdown for Agents" feature?
 
-A: Yes — both implement content negotiation for AI agents. Cloudflare's feature does it at the edge for Pro+ customers. Agentgate does it at the application level for any Node.js server. If you're already on Cloudflare Pro+, you may not need agentgate for markdown serving, but you'd still use it for Content-Signal headers if Cloudflare doesn't add them automatically.
+A: Yes — both implement content negotiation for AI agents. Cloudflare's feature does it at the edge for Pro+ customers. AgentSignal does it at the application level for any Node.js server. If you're already on Cloudflare Pro+, you may not need agentsignal for markdown serving, but you'd still use it for Content-Signal headers if Cloudflare doesn't add them automatically.
 
 ### Q: What's the bundle size?
 
 A: ~7 KB (ESM) / ~7.3 KB (CJS) with two runtime dependencies (picomatch, gray-matter). Turndown is only loaded if `convert: true`.
 
-### Q: Can I use agentgate with TypeScript?
+### Q: Can I use agentsignal with TypeScript?
 
-A: Yes. Agentgate is written in TypeScript and ships with full type declarations. All config options have JSDoc annotations.
+A: Yes. AgentSignal is written in TypeScript and ships with full type declarations. All config options have JSDoc annotations.
 
 ### Q: What Node.js versions are supported?
 
@@ -344,11 +344,11 @@ A: Node.js 18 and above.
 
 ## Exported Utilities
 
-Beyond the main `agentgate()` middleware, these lower-level functions are exported for custom integrations:
+Beyond the main `agentsignal()` middleware, these lower-level functions are exported for custom integrations:
 
 | Export | Description |
 |--------|-------------|
-| `agentgate(options)` | Middleware factory — the primary API |
+| `agentsignal(options)` | Middleware factory — the primary API |
 | `buildSignal(defaults, overrides, path)` | Build a Content-Signal header string |
 | `wantsMarkdown(req)` | Check if the request accepts text/markdown |
 | `resolveCompanion(staticDir, path)` | Find the .html.md companion for a path |
