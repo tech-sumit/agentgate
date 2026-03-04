@@ -1,5 +1,5 @@
 import { existsSync, readFileSync } from 'node:fs';
-import { join, resolve, extname } from 'node:path';
+import { join, resolve, extname, sep } from 'node:path';
 import type { ServerResponse } from 'node:http';
 import matter from 'gray-matter';
 
@@ -14,25 +14,26 @@ export function resolveCompanion(
   staticDir: string,
   requestPath: string,
 ): string | null {
-  const cleaned = requestPath === '/' ? '/index' : requestPath;
+  const cleaned = requestPath === '/' ? 'index' : requestPath.replace(/^\/+/, '');
   const ext = extname(cleaned);
   const root = resolve(staticDir);
+  const rootPrefix = root.endsWith(sep) ? root : root + sep;
 
   const candidates: string[] = [];
 
   if (ext === '.html') {
-    candidates.push(join(staticDir, cleaned + '.md'));
+    candidates.push(join(root, cleaned + '.md'));
   } else {
     candidates.push(
-      join(staticDir, cleaned + '.html.md'),
-      join(staticDir, cleaned + '.md'),
-      join(staticDir, cleaned, 'index.html.md'),
+      join(root, cleaned + '.html.md'),
+      join(root, cleaned + '.md'),
+      join(root, cleaned, 'index.html.md'),
     );
   }
 
   for (const candidate of candidates) {
     const resolved = resolve(candidate);
-    if (!resolved.startsWith(root)) continue;
+    if (!resolved.startsWith(rootPrefix) && resolved !== root) continue;
     if (existsSync(resolved)) return resolved;
   }
   return null;

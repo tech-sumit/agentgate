@@ -1,6 +1,6 @@
 {
   "name": "agentsignal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Content-Signal headers and markdown content negotiation for AI agents. Like helmet for agent-readiness.",
   "author": "Sumit Agrawal <mr.sumitagrawal.17@gmail.com>",
   "license": "MIT",

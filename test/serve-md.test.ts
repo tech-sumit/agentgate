@@ -8,10 +8,13 @@ import {
 } from '../src/serve-md.js';
 
 const FIXTURES = join(import.meta.dirname, '__fixtures__');
+const FIXTURES_SIBLING = FIXTURES + '-sibling';
 
 beforeAll(() => {
   rmSync(FIXTURES, { recursive: true, force: true });
+  rmSync(FIXTURES_SIBLING, { recursive: true, force: true });
   mkdirSync(join(FIXTURES, 'blog'), { recursive: true });
+  mkdirSync(FIXTURES_SIBLING, { recursive: true });
 
   writeFileSync(
     join(FIXTURES, 'about.html.md'),
@@ -20,10 +23,12 @@ beforeAll(() => {
   writeFileSync(join(FIXTURES, 'index.html.md'), '# Home\n');
   writeFileSync(join(FIXTURES, 'blog', 'post-1.html.md'), '# Post 1\n');
   writeFileSync(join(FIXTURES, 'raw.md'), '# Raw\n');
+  writeFileSync(join(FIXTURES_SIBLING, 'secret.html.md'), '# Secret\n');
 });
 
 afterAll(() => {
   rmSync(FIXTURES, { recursive: true, force: true });
+  rmSync(FIXTURES_SIBLING, { recursive: true, force: true });
 });
 
 describe('resolveCompanion', () => {
@@ -66,6 +71,10 @@ describe('resolveCompanion', () => {
 
   it('blocks path traversal via encoded segments', () => {
     expect(resolveCompanion(FIXTURES, '/..%2F..%2Fetc/passwd')).toBeNull();
+  });
+
+  it('blocks sibling directory prefix escape', () => {
+    expect(resolveCompanion(FIXTURES, '/../__fixtures__-sibling/secret')).toBeNull();
   });
 });
 

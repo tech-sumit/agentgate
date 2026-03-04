@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.0.1 — Security Fix (2026-03-04)
+
+### Security
+- Fixed path traversal prefix matching in `resolveCompanion()` — the `startsWith` check now enforces a path separator boundary, preventing escape to sibling directories that share a common name prefix (e.g., `/var/www` vs `/var/www-backup`)
+- Request paths are now stripped of leading slashes before joining to make relative path construction explicit
+
+### Tests
+- Added regression test for sibling directory prefix escape (46 tests total)
+
 ## v1.0.0 — Initial Release (2026-03-04)
 
 ### Core library
