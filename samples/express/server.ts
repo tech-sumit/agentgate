@@ -1,5 +1,5 @@
 /**
- * AgentSignal + Express sample
+ * ContentSignals + Express sample
  *
  * Demonstrates all three modes:
  *   1. Content-Signal headers on every response
@@ -25,14 +25,14 @@
 import express from 'express';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { agentsignal } from '../../src/index.js';
+import { contentsignals } from '../../src/index.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const fixtures = join(__dirname, '..', 'shared-fixtures');
 
 const app = express();
 
-app.use(agentsignal({
+app.use(contentsignals({
   signals: { search: true, aiInput: true, aiTrain: false },
 
   overrides: {
@@ -57,7 +57,7 @@ app.get('/dynamic', (_req, res) => {
       <nav><a href="/">Skip me</a></nav>
       <main>
         <h1>Dynamic Page</h1>
-        <p>This page has no .html.md companion. AgentSignal converts it on-the-fly.</p>
+        <p>This page has no .html.md companion. ContentSignals converts it on-the-fly.</p>
       </main>
       <footer>Strip me too</footer>
     </body></html>

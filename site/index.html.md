@@ -1,17 +1,17 @@
 ---
 tokens: 980
-title: AgentSignal — Content-Signal headers & markdown negotiation for AI agents
+title: ContentSignals — Content-Signal headers & markdown negotiation for AI agents
 description: Node.js middleware that adds Content-Signal headers and serves markdown to AI agents via content negotiation.
 ---
 
-# AgentSignal
+# ContentSignals
 
 Content-Signal headers and markdown content negotiation for AI agents. Like [helmet](https://helmetjs.github.io/) for security headers, but for AI agent compatibility.
 
 ## Install
 
 ```
-npm install agentsignal
+npm install contentsignals
 ```
 
 ## What it does
@@ -28,11 +28,11 @@ One `app.use()` call. Three behaviors:
 
 ```typescript
 import express from 'express';
-import { agentsignal } from 'agentsignal';
+import { contentsignals } from 'contentsignals';
 
 const app = express();
 
-app.use(agentsignal({
+app.use(contentsignals({
   signals: { search: true, aiInput: true, aiTrain: false },
   staticDir: './public',
   convert: true,
@@ -102,7 +102,7 @@ Companions support YAML frontmatter with a `tokens` field for accurate token cou
 
 | Export | Description |
 |--------|-------------|
-| `agentsignal(options)` | Middleware factory |
+| `contentsignals(options)` | Middleware factory |
 | `buildSignal(defaults, overrides, path)` | Build Content-Signal header string |
 | `wantsMarkdown(req)` | Check if request accepts text/markdown |
 | `resolveCompanion(staticDir, path)` | Find .html.md companion |
@@ -111,8 +111,8 @@ Companions support YAML frontmatter with a `tokens` field for accurate token cou
 
 ## Links
 
-- [GitHub](https://github.com/tech-sumit/agentsignal)
-- [npm](https://www.npmjs.com/package/agentsignal)
+- [GitHub](https://github.com/tech-sumit/contentsignals)
+- [npm](https://www.npmjs.com/package/contentsignals)
 - [Content Signals Spec](https://contentsignals.org/)
 
 ## License

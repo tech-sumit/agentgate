@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AgentSignal — Content-Signal headers &amp; markdown negotiation for AI agents</title>
+  <title>ContentSignals — Content-Signal headers &amp; markdown negotiation for AI agents</title>
   <meta name="description" content="Node.js middleware that adds Content-Signal headers and serves markdown to AI agents via content negotiation. Like helmet for agent-readiness.">
   <meta name="content-signal" content="search=yes, ai-input=yes, ai-train=no">
-  <link rel="canonical" href="https://tech-sumit.github.io/agentsignal/">
+  <link rel="canonical" href="https://tech-sumit.github.io/contentsignals/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;500;700;900&display=swap" rel="stylesheet">
@@ -267,16 +267,16 @@
 
   <section class="hero">
     <div class="container">
-      <h1>Agent<span>Signal</span></h1>
+      <h1>Content<span>Signals</span></h1>
       <p class="tagline">Content-Signal headers and markdown content negotiation for AI agents. One middleware call. Three behaviors.</p>
-      <div class="install-box" onclick="navigator.clipboard.writeText('npm install agentsignal')">
-        <span><span class="prompt">$</span> npm install agentsignal</span>
+      <div class="install-box" onclick="navigator.clipboard.writeText('npm install contentsignals')">
+        <span><span class="prompt">$</span> npm install contentsignals</span>
         <span class="copy-hint">click to copy</span>
       </div>
       <div class="links">
-        <a href="https://github.com/tech-sumit/agentsignal">GitHub</a>
-        <a href="https://www.npmjs.com/package/agentsignal">npm</a>
-        <a href="https://github.com/tech-sumit/agentsignal#api">Docs</a>
+        <a href="https://github.com/tech-sumit/contentsignals">GitHub</a>
+        <a href="https://www.npmjs.com/package/contentsignals">npm</a>
+        <a href="https://github.com/tech-sumit/contentsignals#api">Docs</a>
       </div>
     </div>
   </section>
@@ -335,12 +335,12 @@
         <div class="step">
           <div class="step-num">1</div>
           <h3>Install</h3>
-          <p><code>npm install agentsignal</code></p>
+          <p><code>npm install contentsignals</code></p>
         </div>
         <div class="step">
           <div class="step-num">2</div>
           <h3>Add middleware</h3>
-          <p><code>app.use(agentsignal({...}))</code></p>
+          <p><code>app.use(contentsignals({...}))</code></p>
         </div>
         <div class="step">
           <div class="step-num">3</div>
@@ -361,11 +361,11 @@
       <h2>Quick start</h2>
       <p class="subtitle">Add to any Express app in 4 lines.</p>
       <pre><code><span style="color:var(--signal-amber)">import</span> express <span style="color:var(--signal-amber)">from</span> <span style="color:var(--signal-green)">'express'</span>;
-<span style="color:var(--signal-amber)">import</span> { agentsignal } <span style="color:var(--signal-amber)">from</span> <span style="color:var(--signal-green)">'agentsignal'</span>;
+<span style="color:var(--signal-amber)">import</span> { contentsignals } <span style="color:var(--signal-amber)">from</span> <span style="color:var(--signal-green)">'contentsignals'</span>;
 
 <span style="color:var(--signal-amber)">const</span> app = express();
 
-app.use(agentsignal({
+app.use(contentsignals({
   signals: { search: <span style="color:var(--signal-green)">true</span>, aiInput: <span style="color:var(--signal-green)">true</span>, aiTrain: <span style="color:var(--signal-red)">false</span> },
   staticDir: <span style="color:var(--signal-green)">'./public'</span>,
   convert: <span style="color:var(--signal-green)">true</span>,
@@ -397,9 +397,9 @@ app.listen(<span style="color:var(--accent)">3000</span>);</code></pre>
 <footer>
   <div class="container">
     <div class="footer-links">
-      <a href="https://github.com/tech-sumit/agentsignal">GitHub</a>
-      <a href="https://www.npmjs.com/package/agentsignal">npm</a>
-      <a href="https://github.com/tech-sumit/agentsignal#api">API Docs</a>
+      <a href="https://github.com/tech-sumit/contentsignals">GitHub</a>
+      <a href="https://www.npmjs.com/package/contentsignals">npm</a>
+      <a href="https://github.com/tech-sumit/contentsignals#api">API Docs</a>
       <a href="https://contentsignals.org/">Content Signals Spec</a>
     </div>
     <p>MIT License &middot; by Sumit Agrawal</p>

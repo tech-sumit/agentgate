@@ -3,10 +3,10 @@ import { buildSignal } from './signals.js';
 import { wantsMarkdown } from './negotiate.js';
 import { resolveCompanion, serveMd } from './serve-md.js';
 import { convertAndServe } from './convert.js';
-import type { AgentSignalOptions, Middleware } from './types.js';
+import type { ContentSignalsOptions, Middleware } from './types.js';
 
 export type {
-  AgentSignalOptions,
+  ContentSignalsOptions,
   SignalConfig,
   ConvertOptions,
   Middleware,
@@ -16,23 +16,23 @@ export { wantsMarkdown } from './negotiate.js';
 export { resolveCompanion, extractTokenCount, estimateTokens } from './serve-md.js';
 
 /**
- * Create an agentsignal middleware that adds Content-Signal headers
+ * Create a contentsignals middleware that adds Content-Signal headers
  * and handles Accept: text/markdown content negotiation.
  *
  * @example
  * ```typescript
  * import express from 'express';
- * import { agentsignal } from 'agentsignal';
+ * import { contentsignals } from 'contentsignals';
  *
  * const app = express();
- * app.use(agentsignal({
+ * app.use(contentsignals({
  *   signals: { search: true, aiInput: true, aiTrain: false },
  *   staticDir: './dist',
  * }));
  * app.use(express.static('./dist'));
  * ```
  */
-export function agentsignal(options: AgentSignalOptions): Middleware {
+export function contentsignals(options: ContentSignalsOptions): Middleware {
   const { signals, overrides, staticDir, convert, convertOptions } = options;
 
   return (

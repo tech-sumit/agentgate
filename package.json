@@ -1,16 +1,16 @@
 {
-  "name": "agentsignal",
+  "name": "contentsignals",
   "version": "1.0.1",
   "description": "Content-Signal headers and markdown content negotiation for AI agents. Like helmet for agent-readiness.",
   "author": "Sumit Agrawal <mr.sumitagrawal.17@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/tech-sumit/agentsignal#readme",
+  "homepage": "https://github.com/tech-sumit/contentsignals#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tech-sumit/agentsignal.git"
+    "url": "git+https://github.com/tech-sumit/contentsignals.git"
   },
   "bugs": {
-    "url": "https://github.com/tech-sumit/agentsignal/issues"
+    "url": "https://github.com/tech-sumit/contentsignals/issues"
   },
   "type": "module",
   "main": "./dist/index.cjs",
@@ -43,6 +43,7 @@
     "ai-train",
     "ai-input",
     "cloudflare",
+    "contentsignals",
     "agentsignal",
     "agentgate"
   ],

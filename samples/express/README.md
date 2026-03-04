@@ -1,6 +1,6 @@
 # Express Sample
 
-Demonstrates agentsignal with Express.js, using all three features:
+Demonstrates contentsignals with Express.js, using all three features:
 - Content-Signal headers on every response
 - Pre-built `.html.md` companion serving
 - On-the-fly HTML-to-markdown conversion for pages without companions

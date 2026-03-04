@@ -12,7 +12,7 @@
 ## v1.0.0 — Initial Release (2026-03-04)
 
 ### Core library
-- `agentsignal()` middleware factory: composes Content-Signal headers, markdown content negotiation, companion file serving, and on-the-fly HTML-to-markdown conversion into a single `(req, res, next)` handler
+- `contentsignals()` middleware factory: composes Content-Signal headers, markdown content negotiation, companion file serving, and on-the-fly HTML-to-markdown conversion into a single `(req, res, next)` handler
 - `buildSignal()`: constructs `Content-Signal` header strings from `SignalConfig` with per-path overrides via picomatch globs
 - `wantsMarkdown()`: checks `Accept: text/markdown` for content negotiation
 - `resolveCompanion()` + `serveCompanion()`: resolves `.html.md` companion files with token count extraction from YAML frontmatter
