@@ -217,7 +217,9 @@
       font-weight: 500;
       transition: border-color 0.2s;
     }
-    .fw-chip:hover { border-color: var(--accent); }
+    a.fw-chip { text-decoration: none; color: var(--text); }
+    a.fw-chip:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+    span.fw-chip { opacity: 0.5; cursor: default; }
 
     /* --- How it works --- */
     .how-it-works { padding: 3rem 0; }
@@ -381,13 +383,13 @@ app.listen(<span style="color:var(--accent)">3000</span>);</code></pre>
       <h2>Works with any framework</h2>
       <p class="subtitle">Standard <code>(req, res, next)</code> middleware. Runs everywhere Node.js runs.</p>
       <div class="fw-grid">
-        <span class="fw-chip">Express</span>
-        <span class="fw-chip">Fastify</span>
-        <span class="fw-chip">Hono</span>
+        <a class="fw-chip" href="https://github.com/tech-sumit/contentsignals/tree/main/samples/express">Express</a>
+        <a class="fw-chip" href="https://github.com/tech-sumit/contentsignals/tree/main/samples/fastify">Fastify</a>
+        <a class="fw-chip" href="https://github.com/tech-sumit/contentsignals/tree/main/samples/hono">Hono</a>
         <span class="fw-chip">Next.js</span>
         <span class="fw-chip">Nuxt</span>
         <span class="fw-chip">Koa</span>
-        <span class="fw-chip">Plain Node.js</span>
+        <a class="fw-chip" href="https://github.com/tech-sumit/contentsignals/tree/main/samples/node-http">Plain Node.js</a>
       </div>
     </div>
   </section>
